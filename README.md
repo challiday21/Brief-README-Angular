@@ -35,13 +35,11 @@ To create a new structural directive `newStrDir`, the following command is execu
 
 A structure directive can be embedded in the HTML template. In the following, a `<div>` is created for each product in products(.ts) using a `for loop` :
 
-`<div *ngFor="let product of products">
-
-  <h3>
-      {{ product.name }}
-  </h3>
-
-</div>`
+`<div *ngFor="let product of products">`
+  `<h3>`
+      `{{ product.name }}`
+  `</h3>`
+`</div>`
 
 
 Interpolation syntax
