@@ -13,12 +13,12 @@ A component consists of three parts :
 
 The superclass of all components is `<app-root>`, which is placed in the file `index.html` of the application :
 
-`<html lang="en">`
+<pre><html lang="en">`
   `<head>` `...` `</head>`
     `<body>`
      	`<app-root></app-root>`
     `</body>`
-`</html>`
+`</html></pre>
 
 
 Structural directives
