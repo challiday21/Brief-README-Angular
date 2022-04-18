@@ -47,7 +47,7 @@ Interpolation syntax
 
 Properties can be displayed in the HTML template using Angular's interpolation syntax, as in the example above for the product name (`product.name`).
 
-A property value can be inserted, for example, into the title of the component using the `property-binding` syntax. In the title of the following `<a>` HTML element, the product name prefixes the text `details`
+A property value can be inserted, for example, into the title of the component using the `property-binding` syntax. In the following `<a>` HTML element, the product name prefixes the text `details` in the `title` :
 
     `<a [title]="product.name + ' details'">`
       `{{ product.name }}`
@@ -71,7 +71,7 @@ To define the URL path of a component, its path must be indicated in the file
 `app.module.ts`.
 For example, a component that describes a given product in our example can be found by adding the line
 
-- `{ path: 'products/:productId', component: ProductDetailsComponent },`
+`{ path: 'products/:productId', component: ProductDetailsComponent },`
 
 to `app.module.ts` and using the `[routerLink]` directive in the HTML file of the component
 
