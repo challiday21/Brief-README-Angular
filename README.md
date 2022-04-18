@@ -97,26 +97,20 @@ A component can be accessed at a given path name using the directive of the Angu
 To extract a given property of a component, its so-called current `route parameters` are retrieved in the method `ngOnInit()` using `route.snapshot`, as in the example below :
 
 `export class ProductDetailsComponent implements OnInit {`
-
   `product: Product | undefined;`
-
   `constructor(private route: ActivatedRoute) { }`
-
   `ngOnInit() {`
   	`// First get the product id from the current route.`
   	`const routeParams = this.route.snapshot.paramMap;`
   	`const productIdFromRoute = Number(routeParams.get('productId'));`
-
   	`// Find the product that corresponds to the id provided in route.`
   	`this.product = products.find(product => product.id === productIdFromRoute);`
    `}`
-
 `}`
 
 In the file 'product-details.component.html' of the component `ProductDetailsComponent`, a condition `*ngIf` can then be used to display properties if present :
 
 `<h2>Product Details</h2>`
-
 `<div *ngIf="product">`
   `<h3>{{ product.name }}</h3>`
   `<h4>{{ product.price | currency }}</h4>`
@@ -132,12 +126,15 @@ Implementing a new service -  Angular's dependency injection system
 A component can be inserted within another via Angular's dependency injection system. 
 
 Firstly, an instance of a new structural directive is created. Consider the example of displaying a shopping cart :
+
 `ng generate service cart`
 
 An interface `Product` is imported into the `*.ts` file of this new service to handle the product data :
+
 `import { Product } from './products';`
 
 The product data are then stored in an array Product
+
 `export class CartService {`
   `items: Product[] = [];`
 `...`
@@ -146,10 +143,11 @@ The product data are then stored in an array Product
 To add items to and get or clear items from a shopping cart, new methods are added directly to the component class : 
 
 `export class CartService {`
-  `items: Product[] = [];`
 
+  `items: Product[] = [];`  
+  
   `constructor() { }`
-
+  
   `addToCart(product: Product) {`
     `this.items.push(product);`
   `}`
@@ -164,7 +162,7 @@ To add items to and get or clear items from a shopping cart, new methods are add
   `}`
 `}`
 
-The structural directive of `CartService` can then be `injected` into the constructor of another component `ProductDetailsComponent` :
+The component `CartService` can then be `injected` into the constructor of another component `ProductDetailsComponent` :
 
 `export class ProductDetailsComponent implements OnInit {`
 
