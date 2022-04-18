@@ -50,9 +50,9 @@ Properties can be displayed in the HTML template using Angular's interpolation s
 
 A property value can be inserted, for example, into the title of the component using the `property-binding` syntax. In the following `<a>` HTML element, the product name prefixes the text `details` in the `title` :
 
-    `<a [title]="product.name + ' details'">`
-      `{{ product.name }}`
-    `</a>`
+    <a [title]="product.name + ' details'">
+      {{ product.name }}
+    </a>
 
 
 Conditions
@@ -91,6 +91,7 @@ Accessing component properties : the `Angular router`
 ----------------------------------------------------
 
 A component can be accessed at a given path name using the directive of the Angular Router, by inserting the following import in the component `*.ts` file :
+
 `import { ActivatedRoute } from '@angular/router';`
 
 To extract a given property of a component, its so-called current `route parameters` are retrieved in the method `ngOnInit()` using `route.snapshot`, as in the example below :
