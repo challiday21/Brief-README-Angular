@@ -70,8 +70,11 @@ Associate a URL path with a component
 To define the URL path of a component, its path must be indicated in the file
 `app.module.ts`.
 For example, a component that describes a given product in our example can be found by adding the line
-`{ path: 'products/:productId', component: ProductDetailsComponent },`
+
+- `{ path: 'products/:productId', component: ProductDetailsComponent },`
+
 to `app.module.ts` and using the `[routerLink]` directive in the HTML file of the component
+
   `<h3>`
     `<a`
       `[title]="product.name + ' details'"`
@@ -79,6 +82,7 @@ to `app.module.ts` and using the `[routerLink]` directive in the HTML file of th
       `{{ product.name }}`
     `</a>`
   `</h3>`
+  
 The path has a fixed part `/products` and a variable part `product.id`, which varies with the product ID.
 
 
