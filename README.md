@@ -28,6 +28,7 @@ A structural directive is the equivalent of a class in Angular. There are many b
 `*ngIf`, `*ngForOf`, and `*ngSwitch`.
 
 We include Angular structural directives by inserting the appropriate imports at the head of the component class for example :
+
 `import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';`
 
 To create a new structural directive `newStrDir`, the following command is executed on the command line :
