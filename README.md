@@ -56,15 +56,15 @@ A property value can be inserted, for example, into the title of the component u
 
 
 Event binding
--------------------
+-------------
 
 An event can trigger an action by means of `event binding`. In the following HTML statement, the `click` of a given product `Buy` button adds the product to a shopping cart by means of the method `addToCart()`, which is defined in the `*.ts` file of the component :
 
-  <button type="button" (click)="addToCart(product)">Buy</button>
+  `<button type="button" (click)="addToCart(product)">Buy</button>`
 
 
 Conditions
----------------
+----------
 
 A condition can be expressed by an `*ngIf` directive. In the following, a `<p>` element is created and displayed only if a description of a given product exists : 
 
@@ -74,7 +74,7 @@ A condition can be expressed by an `*ngIf` directive. In the following, a `<p>` 
 
 
 Associate a URL path with a component
---------------------------------------------------------
+-------------------------------------
 
 To define the URL path of a component, its path must be indicated in the file
 `app.module.ts`.
@@ -96,7 +96,7 @@ This particular path has a fixed part `/products` and a variable part `product.i
 
 
 Accessing component properties : the `Angular router`
-----------------------------------------------------------------------------
+-----------------------------------------------------
 
 A component can be accessed at a given path name using the directive of the Angular Router, by inserting the following import in the component `*.ts` file :
 
@@ -105,11 +105,14 @@ A component can be accessed at a given path name using the directive of the Angu
 To extract a given property of a component, its so-called current `route parameters` are retrieved in the method `ngOnInit()` using `route.snapshot`, as in the example below :
 
 `export class ProductDetailsComponent implements OnInit {`
+
   `product: Product | undefined;`
+
   `constructor(private route: ActivatedRoute) { }`
+
   `ngOnInit() {`
   	`const routeParams = this.route.snapshot.paramMap;`
-  	`const productIdFromRoute = Number(routeParams.get('productId'));`
+  	`const productIdFromRoute = Number(routeParams.get``('productId'));`
 	`…..`
    `}`
 `}`
@@ -117,7 +120,7 @@ To extract a given property of a component, its so-called current `route paramet
 
 
 Implementing a service -  Angular's `dependency injection system`
---------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 An interface `Product` for instance can be imported into a component to provide static information about product data :
 
