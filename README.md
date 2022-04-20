@@ -13,18 +13,18 @@ A component consists of three parts :
 
 The superclass of all components is `<app-root>`, which is placed in the file `index.html` of the application :
 
-<pre><html lang="en">
-  <head> ... </head>
-    <body>
-     	<app-root></app-root>
-    </body>
-</html></pre>
+`<html lang="en">`
+ ` <head> ... </head>`
+    `<body>`
+     	`<app-root></app-root>`
+   ` </body>`
+`</html>`
 
 
 Structural directives
----------------------
+----------------------------
 
-A structural directive is the equivalent of a class in Angular. There are many built-in directives, which have the prefix '*ng', for example :
+A structural directive is an example of a class in Angular. There are many built-in directives, which have the prefix '*ng', for example :
 `*ngIf`, `*ngForOf`, and `*ngSwitch`.
 
 We include Angular structural directives by inserting the appropriate imports at the head of the component class for example :
@@ -34,7 +34,7 @@ We include Angular structural directives by inserting the appropriate imports at
 To create a new structural directive `newStrDir`, the following command is executed on the command line :
 `ng generate directive newStrDir`.
 
-A structure directive can be embedded in the HTML template. In the following, a `<div>` is created for each product in products(.ts) using a `for loop` :
+A structure directive can be embedded in an HTML template. In the following, a `<div>` is created for each product in products(.ts) using a `for loop` :
 
 `<div *ngFor="let product of products">`
   `<h3>`
@@ -43,22 +43,30 @@ A structure directive can be embedded in the HTML template. In the following, a 
 `</div>`
 
 
-Interpolation syntax
---------------------
+Interpolation syntax and property binding
+-----------------------------------------------------------
 
 Properties can be displayed in the HTML template using Angular's interpolation syntax, as in the example above for the product name (`product.name`).
 
-A property value can be inserted, for example, into the title of the component using the `property-binding` syntax. In the following `<a>` HTML element, the product name prefixes the text `details` in the `title` :
+A property value can be inserted, for example, into the title of the component using the `property-binding` syntax (`[]`). In the following `<a>` HTML element, the product name prefixes the text `details` in the `title` :
 
     <a [title]="product.name + ' details'">
       {{ product.name }}
     </a>
 
 
-Conditions
-----------
+Event binding
+-------------------
 
-A condition can be expressed by an if `*ngIf` directive. In the following, a `<p>` element is created and displayed only if a description exists : 
+An event can trigger an action by means of `event binding`. In the following HTML statement, the `click` of a given product `Buy` button adds the product to a shopping cart by means of the method `addToCart()`, which is defined in the `*.ts` file of the component :
+
+  <button type="button" (click)="addToCart(product)">Buy</button>
+
+
+Conditions
+---------------
+
+A condition can be expressed by an `*ngIf` directive. In the following, a `<p>` element is created and displayed only if a description of a given product exists : 
 
   `<p *ngIf="product.description">`
     `Description: {{ product.description }}`
@@ -66,7 +74,7 @@ A condition can be expressed by an if `*ngIf` directive. In the following, a `<p
 
 
 Associate a URL path with a component
--------------------------------------
+--------------------------------------------------------
 
 To define the URL path of a component, its path must be indicated in the file
 `app.module.ts`.
@@ -84,11 +92,11 @@ to `app.module.ts` and using the `[routerLink]` directive in the HTML file of th
     `</a>`
   `</h3>`
   
-The path has a fixed part `/products` and a variable part `product.id`, which varies with the product ID.
+This particular path has a fixed part `/products` and a variable part `product.id`, which varies with the product ID.
 
 
 Accessing component properties : the `Angular router`
-----------------------------------------------------
+----------------------------------------------------------------------------
 
 A component can be accessed at a given path name using the directive of the Angular Router, by inserting the following import in the component `*.ts` file :
 
@@ -100,50 +108,32 @@ To extract a given property of a component, its so-called current `route paramet
   `product: Product | undefined;`
   `constructor(private route: ActivatedRoute) { }`
   `ngOnInit() {`
-  	`// First get the product id from the current route.`
   	`const routeParams = this.route.snapshot.paramMap;`
   	`const productIdFromRoute = Number(routeParams.get('productId'));`
-  	`// Find the product that corresponds to the id provided in route.`
-  	`this.product = products.find(product => product.id === productIdFromRoute);`
+	`…..`
    `}`
 `}`
 
-In the file 'product-details.component.html' of the component `ProductDetailsComponent`, a condition `*ngIf` can then be used to display properties if present :
-
-`<h2>Product Details</h2>`
-`<div *ngIf="product">`
-  `<h3>{{ product.name }}</h3>`
-  `<h4>{{ product.price | currency }}</h4>`
-  `<p>{{ product.description }}</p>`
-`</div>`
-
-In addition, the pipe operator | is used to transform the property price here into a string called "currency".
 
 
-Implementing a new service -  Angular's dependency injection system
--------------------------------------------------------------------
+Implementing a service -  Angular's `dependency injection system`
+--------------------------------------------------------------------------------------------
 
-A component can be inserted within another via Angular's dependency injection system. 
-
-Firstly, an instance of a new structural directive is created. Consider the example of displaying a shopping cart :
-
-`ng generate service cart`
-
-An interface `Product` is imported into the `*.ts` file of this new service to handle the product data :
+An interface `Product` for instance can be imported into a component to provide static information about product data :
 
 `import { Product } from './products';`
 
-The product data are then stored in an array Product
+The product data can then stored in an array Product
+
+`items: Product[] = [];`
+
+To monitor the variable contents of a shopping cart however, a `service` needs to be created 
+`ng generate service cart`
+and then inserted within an appropriate component by means of the  Angular's dependency injection system. 
+
+To add items to and get or clear items from a shopping cart, new methods are then added directly to the new cart-service component class : 
 
 `export class CartService {`
-  `items: Product[] = [];`
-`...`
-`}`
-
-To add items to and get or clear items from a shopping cart, new methods are added directly to the component class : 
-
-`export class CartService {`
-
   `items: Product[] = [];`  
   
   `constructor() { }`
@@ -172,40 +162,30 @@ The component `CartService` can then be `injected` into the constructor of anoth
   `) { }`
 `}`
 
-The cart is then displayed by adding the method
+A given product can then be added to a cart using the method in the same component class
 
   `addToCart(product: Product) {`
     `this.cartService.addToCart(product);`
     `window.alert('Your product has been added to the cart!');`
   `}`
 
-which calls the method `addToCart()` of the new component.
+which calls another method `addToCart()` of the new cart-service component on the `click` of a button `Buy` :
+  `<button type="button" (click)="addToCart(product)">Buy</button>` .
 
-To add a button "Buy" to each product, the line
-  `<button type="button" (click)="addToCart(product)">Buy</button>`
-is added to the HTML of ProductDetailsComponent.
 
-To visualise a cart, another component `Cart` can be created :
+A component and its service
+---------------------------
+
+To visualise the cart, another component `Cart` is created:
+`ng generate component cart` .
+
+The cart service can then be imported into this cart component class:
 
 `import { Component } from '@angular/core';`
+`import { CartService } from '../cart.service';`
 
-`@Component({`
-  `selector: 'app-cart',`
-  `templateUrl: './cart.component.html',`
-  `styleUrls: ['./cart.component.css']`
-`})`
 `export class CartComponent {`
-
-  `constructor() { }`
-
+  `constructor(`
+    `private cartService: CartService`
+  `) { }`
 `}`
-
-The following line is added to `add.module.ts` to ensure that the
-component can be found :
-`{ path: 'cart', component: CartComponent },`
-
-To update a present version of the Checkout button to point to the
-new Cart component, we enter the text :
-`<a routerLink="/cart" class="button fancy-button">`
-  `<i class="material-icons">shopping_cart</i>Checkout`
-`</a>`
