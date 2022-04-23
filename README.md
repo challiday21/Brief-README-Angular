@@ -22,7 +22,7 @@ The superclass of all components is `<app-root>`, which is placed in the file `i
 
 
 Structural directives
-----------------------------
+---------------------
 
 A structural directive is an example of a class in Angular. There are many built-in directives, which have the prefix '*ng', for example :
 `*ngIf`, `*ngForOf`, and `*ngSwitch`.
@@ -44,9 +44,9 @@ A structure directive can be embedded in an HTML template. In the following, a `
 
 
 Interpolation syntax and property binding
------------------------------------------------------------
+-----------------------------------------
 
-Properties can be displayed in the HTML template using Angular's interpolation syntax, as in the example above for the product name (`product.name`).
+Properties can be displayed in the HTML template using Angular's interpolation syntax, as in the example above for the product name (`{{ product.name }}`).
 
 A property value can be inserted, for example, into the title of the component using the `property-binding` syntax (`[]`). In the following `<a>` HTML element, the product name prefixes the text `details` in the `title` :
 
@@ -132,9 +132,9 @@ The product data can then stored in an array Product
 
 To monitor the variable contents of a shopping cart however, a `service` needs to be created 
 `ng generate service cart`
-and then inserted within an appropriate component by means of the  Angular's dependency injection system. 
+and then inserted within an appropriate component by means of Angular's dependency injection system. 
 
-To add items to and get or clear items from a shopping cart, new methods are then added directly to the new cart-service component class : 
+To add items to and get or clear items from a shopping cart, new methods are then created within the new cart-service component class : 
 
 `export class CartService {`
   `items: Product[] = [];`  
@@ -151,11 +151,11 @@ To add items to and get or clear items from a shopping cart, new methods are the
 
   `clearCart() {`
     `this.items = [];`
-    `eturn this.items;`
+    `return this.items;`
   `}`
 `}`
 
-The component `CartService` can then be `injected` into the constructor of another component `ProductDetailsComponent` :
+The component `CartService` can be `injected` into the constructor of another component `ProductDetailsComponent` :
 
 `export class ProductDetailsComponent implements OnInit {`
 
@@ -165,14 +165,14 @@ The component `CartService` can then be `injected` into the constructor of anoth
   `) { }`
 `}`
 
-A given product can then be added to a cart using the method in the same component class
+A given product can then be added to a cart in the same component class using the method
 
   `addToCart(product: Product) {`
     `this.cartService.addToCart(product);`
     `window.alert('Your product has been added to the cart!');`
   `}`
 
-which calls another method `addToCart()` of the new cart-service component on the `click` of a button `Buy` :
+which calls another method `addToCart()` defined in the new cart-service component on the `click` of a button `Buy` :
   `<button type="button" (click)="addToCart(product)">Buy</button>` .
 
 
@@ -180,9 +180,9 @@ A component and its service
 ---------------------------
 
 To visualise the cart, another component `Cart` is created:
-`ng generate component cart` .
+`ng generate component cart`.
 
-The cart service can then be imported into this cart component class:
+The cart service can similarly be imported into this cart-component class :
 
 `import { Component } from '@angular/core';`
 `import { CartService } from '../cart.service';`
